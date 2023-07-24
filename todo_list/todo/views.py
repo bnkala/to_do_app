@@ -22,7 +22,7 @@ class TaskCreate(CreateView):
     
    
     def form_valid(self, form):
-        form.instance.user = self.request.user
+        ##form.instance.user = self.request.user
         messages.success(self.request, "The task was created successfully.")
         return super(TaskCreate,self).form_valid(form)
 
@@ -34,6 +34,6 @@ class TaskList(ListView):
     model = Task
     context_object_name = 'tasks'
 
-# Create your views here.
+
 def home(request):
     return render(request, 'home.html')
