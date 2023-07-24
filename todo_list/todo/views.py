@@ -1,10 +1,19 @@
 from django.shortcuts import render
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib import messages
 from django.urls import reverse_lazy
 from .models import Task
+
+class TaskDelete(DeleteView):
+    model = Task
+    context_object_name = 'task'
+    success_url = reverse_lazy('tasks')
+
+    def form_valid(self, form):
+        messages.success(self.request, "The task was deleted successfully.")
+        return super(TaskDelete,self).form_valid(form)
 
 class TaskUpdate(UpdateView):
     model = Task
